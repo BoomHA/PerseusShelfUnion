@@ -45,7 +45,6 @@ class U_MyInformationTableViewController: UITableViewController,UIImagePickerCon
             {
                 let data = NSData(contentsOf: NSURL(string: userpic) as! URL)
                 UserImageImgView.image = UIImage(data: data as! Data)
-                
             }
             UserRealNameLabel.text = Response.UserName
             UserEmailLabel.text = Response.UserMail
@@ -58,7 +57,6 @@ class U_MyInformationTableViewController: UITableViewController,UIImagePickerCon
         }
         else{
             Messages().showError(code: 0x1002)
-            
         }
     }
     
