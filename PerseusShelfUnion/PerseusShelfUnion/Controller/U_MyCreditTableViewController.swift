@@ -40,4 +40,5 @@ class U_MyCreditTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
+    
 }
