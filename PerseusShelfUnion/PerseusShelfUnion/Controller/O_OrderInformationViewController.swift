@@ -45,12 +45,10 @@ class O_OrderInformationViewController: UIViewController {
         information.isHidden = false
         plan.isHidden = true
         evaluation.isHidden = true
- 
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 
