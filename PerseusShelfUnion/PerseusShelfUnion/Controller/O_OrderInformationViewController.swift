@@ -49,8 +49,7 @@ class O_OrderInformationViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
+    }s
 
     @IBAction func back(segue:UIStoryboardSegue) {
     }
