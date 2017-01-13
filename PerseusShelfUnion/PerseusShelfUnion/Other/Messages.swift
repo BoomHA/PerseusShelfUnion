@@ -67,6 +67,7 @@ class Messages: NSObject {
         Code[0x2006] = "上传成功"
         Code[0x2007] = "上传失败"
         Code[0x2008] = "获取权限失败"
+        Code[0x2009] = "你还没有认证"
         
         Code[0x3000] = "请输入用户名"
         Code[0x3001] = "请输入密码"

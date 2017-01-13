@@ -12,10 +12,11 @@ private let reuseIdentifier = "Cell"
 var First: Bool = false
 var onelist: [Model_MyPlanDetail.Response]!
 var ListRefresh: Model_MyPlanDetail.Requesting!
-var AllCount: Int?
+var AllCount: Int? = 0
 class O_OrderPlanTimeCollectionViewController: UICollectionViewController{
 
     @IBOutlet var timeCollectionView: UICollectionView!
+    var Code: Bool = false
     var number: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,14 +37,13 @@ class O_OrderPlanTimeCollectionViewController: UICollectionViewController{
             number = Response.Number!
             if Response.Code != 0 {
                 First = false
-                collectionView?.reloadData()
-                ProgressHUD.dismiss()
             }
             else {
                 First = true
-                collectionView?.reloadData()
-                ProgressHUD.dismiss()
             }
+            Code = true
+            collectionView?.reloadData()
+            ProgressHUD.dismiss()
         }
         else {
             Messages().showError(code: 0x1002)
@@ -76,7 +76,9 @@ class O_OrderPlanTimeCollectionViewController: UICollectionViewController{
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        AllCount = number + 1
+        if Code == true {
+            AllCount = number + 1
+        }
         return AllCount!
     }
     

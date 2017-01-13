@@ -118,8 +118,8 @@ class O_StepListTableViewController: UITableViewController {
         if indexPath.section == StepAmount.count {
             if ListRefresh.Day == AllCount {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Add", for: indexPath)
-                if OrderCode == Model_MyOrders.CodeType.已完成 || OrderCode == Model_MyOrders.CodeType.已完结 {
-                    cell.isHidden = true
+                if OrderCode != Model_MyOrders.CodeType.已完成 || OrderCode != Model_MyOrders.CodeType.已完结 {
+                    cell.isHidden = false
                 }
                 return cell
             }

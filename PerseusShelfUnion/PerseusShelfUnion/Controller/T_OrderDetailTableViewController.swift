@@ -102,38 +102,43 @@ class T_OrderDetailTableViewController: UITableViewController, UIPickerViewDataS
     }
     
     func touchButton() {
-        let alertController = UIAlertController(title: "报价\n\n\n\n\n", message: nil, preferredStyle: UIAlertControllerStyle.alert)
-        let margin:CGFloat = 10.0
-        let alertViewHeight:CGFloat = 100
-        let alertView = UIView(frame: CGRect(x: margin, y: margin + 40, width: alertController.view.bounds.size.width - margin * 7.0, height: alertViewHeight))
-        let textFieldHeight:CGFloat = 30.0
-        textField = UITextField(frame: CGRect(x: 0, y: (alertView.bounds.size.height / 2.0) -  (textFieldHeight / 2), width: alertView.bounds.size.width / 2.0, height: textFieldHeight))
-        textField.borderStyle = .roundedRect
-        textField.returnKeyType = .done
-        textField.keyboardType = .numberPad
-        alertView.addSubview(textField)
-        
-        let pickerView = UIPickerView(frame: CGRect(x: textField.frame.width + 5, y: 0, width: alertView.bounds.size.width / 2.0, height: alertViewHeight))
-        pickerView.dataSource = self
-        pickerView.delegate = self
-        pickerView.selectedRow(inComponent: 0)
-        alertView.addSubview(pickerView)
-        select = Model_TakeOrderDetails().PriceUnitType[0]
-        
-        let cancelAction = UIAlertAction(title: "放弃", style: UIAlertActionStyle.cancel, handler: nil)
-        let okAction = UIAlertAction(title: "提交", style: .destructive) { (UIAlertAction) in
-            if self.textField.text != "" {
-                OrdersReposity().GetOrder(Requesting: Model_GetOrder.Requesting(RobOrderID: String(self.RobOrderID), OfferMoney: self.textField.text!, OfferWeight: self.select))
-                NotificationCenter.default.addObserver(self, selector: #selector(self.GetOrder(_:)), name: NSNotification.Name(rawValue: "GetOrder"), object: nil)
+        if IsProved == 1 {
+            let alertController = UIAlertController(title: "报价\n\n\n\n\n", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+            let margin:CGFloat = 10.0
+            let alertViewHeight:CGFloat = 100
+            let alertView = UIView(frame: CGRect(x: margin, y: margin + 40, width: alertController.view.bounds.size.width - margin * 7.0, height: alertViewHeight))
+            let textFieldHeight:CGFloat = 30.0
+            textField = UITextField(frame: CGRect(x: 0, y: (alertView.bounds.size.height / 2.0) -  (textFieldHeight / 2), width: alertView.bounds.size.width / 2.0, height: textFieldHeight))
+            textField.borderStyle = .roundedRect
+            textField.returnKeyType = .done
+            textField.keyboardType = .numberPad
+            alertView.addSubview(textField)
+            
+            let pickerView = UIPickerView(frame: CGRect(x: textField.frame.width + 5, y: 0, width: alertView.bounds.size.width / 2.0, height: alertViewHeight))
+            pickerView.dataSource = self
+            pickerView.delegate = self
+            pickerView.selectedRow(inComponent: 0)
+            alertView.addSubview(pickerView)
+            select = Model_TakeOrderDetails().PriceUnitType[0]
+            
+            let cancelAction = UIAlertAction(title: "放弃", style: UIAlertActionStyle.cancel, handler: nil)
+            let okAction = UIAlertAction(title: "提交", style: .destructive) { (UIAlertAction) in
+                if self.textField.text != "" {
+                    OrdersReposity().GetOrder(Requesting: Model_GetOrder.Requesting(RobOrderID: String(self.RobOrderID), OfferMoney: self.textField.text!, OfferWeight: self.select))
+                    NotificationCenter.default.addObserver(self, selector: #selector(self.GetOrder(_:)), name: NSNotification.Name(rawValue: "GetOrder"), object: nil)
+                }
+                else {
+                    ProgressHUD.showError("请输入金额")
+                }
             }
-            else {
-                ProgressHUD.showError("请输入金额")
-            }
+            alertController.view.addSubview(alertView)
+            alertController.addAction(cancelAction)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
         }
-        alertController.view.addSubview(alertView)
-        alertController.addAction(cancelAction)
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true, completion: nil)
+        else {
+            Messages().showError(code: 0x2009)
+        }
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

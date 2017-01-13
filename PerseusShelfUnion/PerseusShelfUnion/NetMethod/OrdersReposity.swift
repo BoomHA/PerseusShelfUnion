@@ -286,7 +286,7 @@ class OrdersReposity: NSObject, IOrdersReposity {
             "OrderID": OfferID,
             "UserID": UserID
         ]
-        print(request)
+//        print(request)
         request.httpMethod = httpMethod
         request.timeoutInterval = timeoutInterval
         request.httpBody = try! JSONSerialization.data(withJSONObject: parameters, options: [])
@@ -369,8 +369,8 @@ class OrdersReposity: NSObject, IOrdersReposity {
         var Response: Model_TakeOrderDetails.CodeType!
         let parameters = [
             "RobOrderID":Requesting.RobOrderID,
-            "OfferMoney":Requesting.OfferMoney,
-            "OfferWeight":Requesting.OfferWeight
+            "OrderOffer":Requesting.OfferMoney,
+            "Weight":Requesting.OfferWeight
         ]
         request.httpMethod = httpMethod
         request.timeoutInterval = timeoutInterval
